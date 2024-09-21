@@ -1,0 +1,35 @@
+import random
+
+# Function definition f(x) = x^2
+def f(x):
+    return x**2
+
+# Limits of integration
+a = 0.0
+b = 3.0
+
+# 1. Calculate ymin and ymax (as done in Task 2)
+ymin = 0  # f(0) = 0^2 = 0
+ymax = f(b)  # f(3) = 3^2 = 9
+
+# 2. Calculate the area of the bounding square
+A = (b - a) * (ymax - ymin)
+
+# 3. Monte Carlo parameters
+N = 1000000
+M = 0
+
+# 4. Generate random points and count points under the curve
+for _ in range(N):
+    x_rand = random.uniform(a, b)
+    y_rand = random.uniform(ymin, ymax)
+
+    # 5. Check if the point is under the curve
+    if y_rand <= f(x_rand):
+        M += 1
+
+# 6. Calculate the numerical integral
+NumericalIntegral = (M / N) * A
+
+# 7. Output results
+print(f"Monte Carlo Numerical Integral: {NumericalIntegral}")

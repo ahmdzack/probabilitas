@@ -1,0 +1,43 @@
+import random
+import matplotlib.pyplot as plt
+
+# 1. PRNG Initialization
+random.seed(2)
+
+# 2. Define the function f(x) = x^2
+def f(x):
+    return x**2
+
+# 3. Integration limits and number of steps
+a = 0.0
+b = 3.0
+n = 1000000  # Number of random points
+
+# Monte Carlo Integration
+sum_f = 0
+samples = []
+for i in range(n):
+    x_rand = random.uniform(a, b)
+    sum_f += f(x_rand)
+    if (i + 1) % (n // 100) == 0:
+        samples.append((b - a) * sum_f / (i + 1))
+
+# Final approximation of the integral
+monte_carlo_result = (b - a) * sum_f / n
+
+# 4. Exact solution
+exact_solution = (b**3) / 3 - (a**3) / 3
+
+# 5. Output results
+print(f"Monte Carlo Approximation: {monte_carlo_result}")
+print(f"Exact Solution: {exact_solution}")
+print(f"Error: {abs(monte_carlo_result - exact_solution)}")
+
+# 6. Plotting
+plt.plot(samples, label="Monte Carlo Approximation")
+plt.axhline(y=exact_solution, color='r', linestyle='-', label="Exact Value")
+plt.xlabel("Iterations")
+plt.ylabel("Integral Value")
+plt.title("Convergence of Monte Carlo Simulation")
+plt.legend()
+plt.show()  

@@ -1,0 +1,31 @@
+# Define the same function f(x) = x^2
+def f(x):
+    return x**2
+
+# Integration limits and number of steps for min-max detection
+a = 0.0
+b = 3.0
+NumSteps = 100000  # Number of steps for detecting min and max
+
+# Step size
+step_size = (b - a) / NumSteps
+
+# 1. Initial values for ymin and ymax
+x_start = a
+ymin = f(x_start)
+ymax = f(x_start)
+
+# 2. Iterate through x-values from a to b
+for i in range(NumSteps):
+    x = a + i * step_size
+    y = f(x)
+
+    # Update ymin and ymax
+    if y < ymin:
+        ymin = y
+    if y > ymax:
+        ymax = y
+
+# Output results
+print(f"Minimum value of f(x) in range [{a}, {b}] is: ymin = {ymin}")
+print(f"Maximum value of f(x) in range [{a}, {b}] is: ymax = {ymax}")
