@@ -1,0 +1,24 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def is_inside_circle(x, y):
+    return x**2 + y**2 <= 1
+
+np.random.seed(42)
+n_points = 10000
+x = np.random.uniform(-1, 1, n_points)
+y = np.random.uniform(-1, 1, n_points)
+
+inside_circle = is_inside_circle(x, y)
+
+plt.figure(figsize=(6,6))
+plt.scatter(x[inside_circle], y[inside_circle], color='blue', s=1, label='Inside Circle')
+plt.scatter(x[~inside_circle], y[~inside_circle], color='red', s=1, label='Outside Circle')
+plt.gca().set_aspect('equal', adjustable='box')
+
+plt.title('Monte Carlo Simulation for Full Circle Area')
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+
+plt.legend(loc="lower right")
+plt.show()

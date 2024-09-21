@@ -1,0 +1,22 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def lemparkoin(n_tosses):
+    return np.random.choice([0, 1], size=n_tosses)  # 0 for tails, 1 for heads
+
+def cumulative_probabilities(tosses):
+    return np.cumsum(tosses) / np.arange(1, len(tosses) + 1)
+
+n_tosses = 5000
+tosses = lemparkoin(n_tosses)
+cumulative_prob = cumulative_probabilities(tosses)
+
+plt.figure(figsize=(10, 6))
+plt.plot(cumulative_prob, label="Cumulative Probability of Heads")
+plt.axhline(y=0.5, color='r', linestyle='--', label='Expected Probability (0.5)')
+plt.title(f"Monte Carlo Simulation of Coin Tosses ({n_tosses} Tosses)")
+plt.xlabel("Number of Tosses")
+plt.ylabel("Probability of Heads")
+plt.legend()
+plt.grid(True)
+plt.show()
