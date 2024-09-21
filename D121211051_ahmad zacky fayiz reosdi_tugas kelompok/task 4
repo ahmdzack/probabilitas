@@ -1,57 +1,57 @@
-import random
-import numpy as np
-import matplotlib.pyplot as plt
+    import random
+    import numpy as np
+    import matplotlib.pyplot as plt
 
-# Define the function f(x) = x^2
-def f(x):
-    return x**2
+    # Define the function f(x) = x^2
+    def f(x):
+        return x**2
 
-# Limits of integration
-a = 0.0
-b = 3.0
+    # Limits of integration
+    a = 0.0
+    b = 3.0
 
-# 1. Generate data for function curve
-x_vals = np.linspace(a, b, 500)  # 500 points between a and b
-y_vals = f(x_vals)
+    # 1. Generate data for function curve
+    x_vals = np.linspace(a, b, 500)  # 500 points between a and b
+    y_vals = f(x_vals)
 
-# 2. Monte Carlo parameters
-N = 10000
-M = 0
-ymin = 0
-ymax = f(b)  # f(3) = 9
+    # 2. Monte Carlo parameters
+    N = 10000
+    M = 0
+    ymin = 0
+    ymax = f(b)  # f(3) = 9
 
-# Lists to store points under and above the curve
-points_under = []
-points_above = []
+    # Lists to store points under and above the curve
+    points_under = []
+    points_above = []
 
-# 3. Generate random points
-for _ in range(N):
-    x_rand = random.uniform(a, b)
-    y_rand = random.uniform(ymin, ymax)
+    # 3. Generate random points
+    for _ in range(N):
+        x_rand = random.uniform(a, b)
+        y_rand = random.uniform(ymin, ymax)
 
-    # Check if the point is under the curve
-    if y_rand <= f(x_rand):
-        points_under.append((x_rand, y_rand))  # Points under the curve
-        M += 1
-    else:
-        points_above.append((x_rand, y_rand))  # Points above the curve
+        # Check if the point is under the curve
+        if y_rand <= f(x_rand):
+            points_under.append((x_rand, y_rand))  # Points under the curve
+            M += 1
+        else:
+            points_above.append((x_rand, y_rand))  # Points above the curve
 
-# 4. Plotting the function curve and random points
-plt.plot(x_vals, y_vals, color='red', label=r'$f(x) = x^2$')  # Function curve in red
+    # 4. Plotting the function curve and random points
+    plt.plot(x_vals, y_vals, color='red', label=r'$f(x) = x^2$')  # Function curve in red
 
-# Unpack points for plotting
-if points_under:
-    x_under, y_under = zip(*points_under)
-    plt.scatter(x_under, y_under, color='blue', s=1, label='Points under the curve')
+    # Unpack points for plotting
+    if points_under:
+        x_under, y_under = zip(*points_under)
+        plt.scatter(x_under, y_under, color='blue', s=1, label='Points under the curve')
 
-if points_above:
-    x_above, y_above = zip(*points_above)
-    plt.scatter(x_above, y_above, color='yellow', s=1, label='Points above the curve')
+    if points_above:
+        x_above, y_above = zip(*points_above)
+        plt.scatter(x_above, y_above, color='yellow', s=1, label='Points above the curve')
 
-plt.title("Monte Carlo Simulation: f(x) = x^2")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.legend()
+    plt.title("Monte Carlo Simulation: f(x) = x^2")
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.legend()
 
 
-plt.show()
+    plt.show()
